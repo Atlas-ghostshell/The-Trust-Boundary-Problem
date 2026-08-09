@@ -30,10 +30,16 @@ The whitelist trusted a *namespace*, not an *owner*. Any AWS customer — includ
 **Confirmed remediation:** the wildcard entry has been removed. Independent researcher retest confirms tunnel establishment to an AWS-hosted exit node is no longer possible.
 
 ![Tunnel establishment confirmed](screenshots/finding1_tunnel_established.png)
+`Tunnel establishment confirmed`
+
 
 ![System-wide SOCKS5 routing confirmed](screenshots/finding1_proxy_log.png)
+`System-wide SOCKS5 routing confirmed`
+
 
 ![Unrestricted browsing confirmed, no payment](screenshots/finding1_youtube_bypass.png)
+`Unrestricted browsing confirmed, no payment`
+
 
 ## Finding 2 — Unlawful Data Processing & Persistent User Surveillance
 **`SPEEDNETWIFI-2026-002` · CVSS 3.1: 7.5 HIGH (`AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N`) · Status: ❌ UNRESOLVED**
@@ -54,6 +60,8 @@ This is a compliance and consent failure, not a code bug — it maps directly to
 The portal's device-authorization endpoint — used by a paid customer to retrieve their own login credentials for a second device — accepts the client's IP, MAC address, and router ID as plain request parameters and returns the account's **username and password in plaintext**, without verifying the requester actually owns the session those identifiers describe.
 
 ![Plaintext credentials presented to an authenticated user which can be used in a second device](screenshots/finding3_plaintext_creds.png)
+`Plaintext credentials presented to an authenticated user which can be used in a second device`
+
 
 That's an Insecure Direct Object Reference: authorization is derived from client-supplied, non-secret values instead of a server-issued session token. Two of those three values require no effort to obtain — the router ID is a static constant shared by every user on the deployment, and a device's MAC address is broadcast in cleartext in every WiFi frame it sends, observable by anyone in range with a card in monitor mode. No interaction with the target is required.
 
